@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz IA – Con Immagini</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #eef2f7;
+            padding: 20px;
+            max-width: 900px;
+            margin: auto;
+        }
+
+        h1 {
+            text-align: center;
+            color: #222;
+            margin-bottom: 30px;
+        }
+
+        .question {
+            background: #fff;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 12px;
+            box-shadow: 0 3px 7px rgba(0,0,0,0.1);
+        }
+
+        img {
+            width: 100%;
+            max-height: 250px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 12px;
+        }
+
+        button {
+            background: #0066ff;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            cursor: pointer;
+            font-size: 18px;
+            border-radius: 8px;
+            margin-top: 20px;
+            width: 100%;
+        }
+
+        button:hover {
+            background: #004fcc;
+        }
+
+        .correct {
+            color: green;
+            font-weight: bold;
+        }
+
+        .wrong {
+            color: red;
+            font-weight: bold;
+        }
+
+        #result {
+            font-size: 22px;
+            text-align: center;
+            margin-top: 30px;
+            padding: 20px;
+            background: #d9e6ff;
+            border-radius: 12px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Quiz sull’Intelligenza Artificiale</h1>
+
+<form id="quizForm">
+
+    <!-- DOMANDA 1 -->
+    <div class="question">
+        <img src="https://static.wixstatic.com/media/142722_f99bd0d3a5324e53a888346f38650ac4~mv2.png/v1/fill/w_568,h_318,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/142722_f99bd0d3a5324e53a888346f38650ac4~mv2.png" alt="Dati IA">
+        <p><strong>1. Che cosa serve all’Intelligenza Artificiale per imparare?</strong></p>
+        <label><input type="radio" name="q1" value="A"> A. Disegni</label><br>
+        <label><input type="radio" name="q1" value="B"> B. Dati</label><br>
+        <label><input type="radio" name="q1" value="C"> C. Indizi segreti</label><br>
+        <label><input type="radio" name="q1" value="D"> D. Solo voce umana</label>
+    </div>
+
+    <!-- DOMANDA 2 -->
+    <div class="question">
+        <img src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8" alt="Riconoscimento facciale">
+        <p><strong>2. Quale di queste è un esempio di IA nella vita quotidiana?</strong></p>
+        <label><input type="radio" name="q2" value="A"> A. Una calcolatrice</label><br>
+        <label><input type="radio" name="q2" value="B"> B. Una bicicletta elettrica</label><br>
+        <label><input type="radio" name="q2" value="C"> C. Il riconoscimento facciale sul telefono</label><br>
+        <label><input type="radio" name="q2" value="D"> D. Una lampadina</label>
+    </div>
+
+    <!-- DOMANDA 3 -->
+    <div class="question">
+        <img src="https://media-assets.wired.it/photos/615f3b54ec1d39f8ae9ee11c/master/pass/1532010237_aiwired.jpg" alt="Auto autonoma">
+        <p><strong>3. Le auto autonome usano l’IA per…</strong></p>
+        <label><input type="radio" name="q3" value="A"> A. Indovinare la strada</label><br>
+        <label><input type="radio" name="q3" value="B"> B. Leggere la mente del guidatore</label><br>
+        <label><input type="radio" name="q3" value="C"> C. Usare sensori e telecamere per decidere come muoversi</label><br>
+        <label><input type="radio" name="q3" value="D"> D. Andare solo in linea retta</label>
+    </div>
+
+    <!-- DOMANDA 4 -->
+    <div class="question">
+        <img src="https://images.unsplash.com/photo-1518770660439-4636190af475" alt="Errore IA">
+        <p><strong>4. L’Intelligenza Artificiale può sbagliare?</strong></p>
+        <label><input type="radio" name="q4" value="A"> A. No, mai</label><br>
+        <label><input type="radio" name="q4" value="B"> B. Sì, se i dati con cui è stata addestrata non sono corretti</label><br>
+        <label><input type="radio" name="q4" value="C"> C. Solo di notte</label><br>
+        <label><input type="radio" name="q4" value="D"> D. Solo quando è vecchia</label>
+    </div>
+
+    <!-- DOMANDA 5 -->
+    <div class="question">
+        <img src="https://images.unsplash.com/photo-1581090700227-1e37b190418e" alt="Robot IA">
+        <p><strong>5. Quale tra queste cose l’IA NON può fare da sola?</strong></p>
+        <label><input type="radio" name="q5" value="A"> A. Riconoscere un’immagine</label><br>
+        <label><input type="radio" name="q5" value="B"> B. Imparare da molti esempi</label><br>
+        <label><input type="radio" name="q5" value="C"> C. Decidere i propri obiettivi da sola</label><br>
+        <label><input type="radio" name="q5" value="D"> D. Trovare schemi nei dati</label>
+    </div>
+
+    <button type="button" onclick="checkQuiz()">Verifica le risposte</button>
+
+</form>
+
+<div id="result"></div>
+
+<script>
+function checkQuiz() {
+    const correctAnswers = {
+        q1: "B",
+        q2: "C",
+        q3: "C",
+        q4: "B",
+        q5: "C"
+    };
+
+    let score = 0;
+
+    for (let q in correctAnswers) {
+        let selected = document.querySelector(`input[name="${q}"]:checked`);
+        let questionDiv = document.querySelector(`input[name="${q}"]`).closest('.question');
+
+        questionDiv.querySelectorAll("label").forEach(l => {
+            l.classList.remove("correct", "wrong");
+        });
+
+        if (selected) {
+            if (selected.value === correctAnswers[q]) {
+                score++;
+                selected.parentElement.classList.add("correct");
+            } else {
+                selected.parentElement.classList.add("wrong");
+
+                let correctOption = document.querySelector(`input[name="${q}"][value="${correctAnswers[q]}"]`);
+                correctOption.parentElement.classList.add("correct");
+            }
+        }
+    }
+
+    const resultBox = document.getElementById("result");
+    resultBox.style.display = "block";
+    resultBox.innerHTML = `Hai totalizzato <strong>${score}/5</strong> punti!`;
+}
+</script>
+
+</body>
+</html>
